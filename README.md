@@ -4,7 +4,7 @@ Welcome to OmniMind—a Python library that makes working with MCP (Model Contex
 
 [![GitHub Stars](https://img.shields.io/github/stars/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/network)
-[![Build Status](https://github.com/Techiral/OmniMind/actions/workflows/ci.yml/badge.svg)](https://github.com/Techiral/OmniMind/actions)
+[![Build Status](https://github.com/Techiral/OmniMind/actions/workflows/welcome.yml/badge.svg)](https://github.com/Techiral/OmniMind/actions)
 [![License](https://img.shields.io/github/license/Techiral/OmniMind)](https://github.com/Techiral/OmniMind/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/pypi/dm/omnimind)](https://pypistats.org/packages/omnimind)
 
