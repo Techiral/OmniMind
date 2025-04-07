@@ -1,5 +1,4 @@
-# Chat with OmniMind in 3 lines!
 from omnimind import OmniMind
 
-agent = OmniMind()
-agent.run()  # Type 'quit' when you’re done
+agent = OmniMind(config_path="multi_server_config.json")
+agent.run()
