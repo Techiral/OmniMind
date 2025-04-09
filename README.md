@@ -122,4 +122,4 @@ Got a question or idea? Reach out:
 
 Thanks for checking out OmniMind! We’re excited to see what you do with it. Let’s make MCP and AI easy and fun together!
 
-— [Your Name] & the OmniMind Team
+— Lakshya Gupta & the OmniMind Team
