@@ -1,0 +1,18 @@
+name: Welcome to OmniMind
+
+on: [pull_request_target, issues]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          Hey there! Thanks for opening your first issue on OmniMind! We’re thrilled you’re here—our Python library makes MCP and AI easy and fun for everyone, and your ideas help us grow. What’s on your mind? Let’s make it happen together! Check out [usage.md](https://github.com/Techiral/OmniMind/blob/main/docs/usage.md) to get started, and join the fun in [discussions](https://github.com/Techiral/OmniMind/discussions). Oh, and a quick ⭐ star at [Techiral/OmniMind](https://github.com/Techiral/OmniMind) would help us climb GitHub’s ranks—let’s aim for repo of the day!
+        pr-message: |
+          Wow, your first pull request to OmniMind—awesome! We’re so excited you’re joining the Techiral family! This open-source Python library loves MCP and AI, and your help makes it even better. It’s super easy to jump in, and your code could get us trending fast. Want to chat about it? Head to [discussions](https://github.com/Techiral/OmniMind/discussions). A quick ⭐ star at [Techiral/OmniMind](https://github.com/Techiral/OmniMind) would be amazing—let’s make it repo of the day together!
