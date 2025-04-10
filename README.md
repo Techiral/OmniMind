@@ -109,9 +109,7 @@ Your ideas and feedback make OmniMind better for everyone!
 
 Here’s a quick peek at OmniMind working its magic:
 
-<video src="https://github.com/Techiral/OmniMind/raw/refs/heads/main/demo/OmniMind.mp4" width="600" controls muted loop>
-  Your browser does not support the video tag.
-</video>
+<img src="https://github.com/Techiral/OmniMind/blob/main/demo/OmniMind.gif?raw=true" width="600">
 
 ---
 
