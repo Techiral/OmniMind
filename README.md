@@ -13,7 +13,7 @@ Welcome to OmniMind—an **open-source** Python library designed for effortless 
 ---
 
 <p align="center">
-  <img src="demo/OmniMind.png" width="600" height="400">
+  <img src="https://github.com/Techiral/OmniMind/blob/main/demo/OmniMind.png?raw=true" width="600" height="400">
 </p>
 
 ## What’s OmniMind All About?
@@ -109,7 +109,7 @@ Your ideas and feedback make OmniMind better for everyone!
 
 Here’s a quick peek at OmniMind working its magic:
 
-<video src="demo/OmniMind.mp4" width="600" controls muted loop>
+<video src="https://github.com/Techiral/OmniMind/raw/refs/heads/main/demo/OmniMind.mp4" width="600" controls muted loop>
   Your browser does not support the video tag.
 </video>
 
