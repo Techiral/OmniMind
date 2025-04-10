@@ -13,7 +13,7 @@ Welcome to OmniMind—an **open-source** Python library designed for effortless 
 ---
 
 <p align="center">
-  <img src="demo\OmniMind.png" width="1536" height="1024">
+  <img src="demo/OmniMind.png" width="600" height="400">
 </p>
 
 ## What’s OmniMind All About?
