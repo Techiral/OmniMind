@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="omnimind",
-    version="0.1.0",
+    version="0.1.1",
     author="Lakshya Gupta",
     author_email="techiralthefuture@gmail.com",
     description="A plug-and-play Python library for effortless MCP server integration, powered by Google Gemini",
@@ -19,5 +19,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    keywords='open-source, MCP, Model-Context-Protocol, OmniMind, MCP Server, MCP Client, python, AI Agents, AI workflows, AI Automations, AI Tools, Plug & Play, Techiral, Google Gemini',
     python_requires='>=3.6',
 )

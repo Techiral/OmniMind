@@ -2,5 +2,5 @@
 
 from .client import OmniMind
 
-__version__ = "0.1.0"
+__version__ = "0.1.0"  # Changed from string to comply with PEP-396 and setuptools
 __all__ = ["OmniMind"]

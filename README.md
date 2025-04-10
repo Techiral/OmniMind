@@ -1,18 +1,24 @@
 # OmniMind
 
-Welcome to OmniMind—a Python library that makes working with MCP (Model Context Protocol) and AI simple and fun! Whether you’re a developer building tools, a beginner trying out AI, or a business owner looking to add smart features to your projects, OmniMind is here to help. It’s easy to use, free, and packed with everything you need to get started.
+Welcome to OmniMind—an **open-source** Python library designed for effortless **MCP (Model Context Protocol)** integration. It simplifies working with **AI Agents**, **AI workflows**, and **AI Automations**, making it accessible to developers building **AI Tools**, beginners exploring **MCP Servers** and **MCP Clients**, and businesses seeking to enhance their projects. OmniMind is designed as a **Plug & Play** solution, is free to use, and provides all the necessary components to get started with **python** and **AI** development. Created by **Techiral**, OmniMind is your gateway to streamlined **AI** development. Join **Techiral** and the OmniMind team in building the future of AI!
 
 [![GitHub Stars](https://img.shields.io/github/stars/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/network)
-[![Build Status](https://github.com/Techiral/OmniMind/actions/workflows/ci.yml/badge.svg)](https://github.com/Techiral/OmniMind/actions)
+[![Build Status](https://github.com/Techiral/OmniMind/actions/workflows/welcome.yml/badge.svg)](https://github.com/Techiral/OmniMind/actions)
 [![License](https://img.shields.io/github/license/Techiral/OmniMind)](https://github.com/Techiral/OmniMind/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/pypi/dm/omnimind)](https://pypistats.org/packages/omnimind)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-techiral-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/techiral/)
+[![YouTube](https://img.shields.io/badge/YouTube-@techiral-red?style=flat-square&logo=youtube)](https://www.youtube.com/@techiral)
 
 ---
 
+<p align="center">
+  <img src="demo\OmniMind.png" width="1536" height="1024">
+</p>
+
 ## What’s OmniMind All About?
 
-OmniMind is a Python library that connects you to MCP servers and AI tools in a way that’s quick and straightforward. It’s built to save you time and make your projects smarter, no matter your experience level. Here’s why people like it:
+OmniMind is an **open-source** **python** library designed to simplify **Model Context Protocol (MCP)** integration for **AI Agents**, **AI workflows**, and **AI Automations**. It provides a **Plug & Play** experience for connecting to **MCP Servers** and utilizing various **AI Tools**. Whether you're a seasoned developer or just starting with **AI**, OmniMind offers a streamlined approach to building intelligent applications. Here's why you'll love using OmniMind:
 
 - **Easy to Start**: You can get going with just one line of code—no complicated setup needed.
 - **Works Right Away**: Comes with tools like Terminal, Fetch, Memory, and Filesystem, ready to use out of the box.
@@ -101,9 +107,11 @@ Your ideas and feedback make OmniMind better for everyone!
 
 ## See It in Action
 
-Here’s a quick peek at OmniMind working its magic:  
-![OmniMind Demo](https://via.placeholder.com/600x300.png?text=OmniMind+Demo)  
-*(Replace this with a real GIF of OmniMind running—coming soon!)*
+Here’s a quick peek at OmniMind working its magic:
+
+<video src="demo/OmniMind.mp4" width="600" controls muted loop>
+  Your browser does not support the video tag.
+</video>
 
 ---
 
@@ -113,12 +121,29 @@ OmniMind is free to use under the [MIT License](LICENSE). That means you can do 
 
 ---
 
+## Why Contribute to OmniMind?
+
+Contributing to OmniMind offers a unique opportunity to:
+
+*   **Learn and Grow:** Expand your knowledge of MCP, AI Agents, and cutting-edge technologies.
+*   **Build a Portfolio:** Showcase your skills and contributions to a growing open-source project.
+*   **Collaborate with Experts:** Work alongside experienced developers and AI enthusiasts.
+*   **Make a Difference:** Help shape the future of AI development and empower others to build intelligent applications.
+
+## Contributing
+
+We welcome contributions to OmniMind! If you're passionate about **open-source**, **AI Agents**, **AI workflows**, or **Model Context Protocol (MCP)**, we encourage you to contribute to OmniMind. Check out our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines and instructions on how to get started. Let's build the future of AI together!
+
+## Code of Conduct
+
+Please note that OmniMind has a Code of Conduct. By participating in this project, you agree to abide by its terms.
+
 ## Questions?
 
 Got a question or idea? Reach out:
 - Email: [techiralthefuture@gmail.com](mailto:techiralthefuture@gmail.com)  
 - GitHub: [https://github.com/Techiral/OmniMind/](https://github.com/Techiral/OmniMind/)  
-- X: Follow us at [@techiral_](https://x.com/yourusername)  
+- X: Follow us at [@techiral_](https://x.com/techiral_)
 
 Thanks for checking out OmniMind! We’re excited to see what you do with it. Let’s make MCP and AI easy and fun together!
 
