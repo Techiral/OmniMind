@@ -1,0 +1,16 @@
+/* docs/source/_static/custom.css */
+.wy-nav-content {
+    background-color: #f8f9fa;
+}
+
+.wy-side-nav-search {
+    background-color: #005555;
+}
+
+.wy-side-nav-search input[type=text] {
+    border-color: #00bcd4;
+}
+
+a {
+    color: #00bcd4;
+}
