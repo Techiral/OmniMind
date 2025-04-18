@@ -29,6 +29,8 @@ OmniMind is an **open-source** **python** library designed to simplify **Model C
 
 It’s perfect for developers coding AI apps, beginners learning MCP, solopreneurs automating tasks, or entrepreneurs building new ideas.
 
+<a href="https://www.producthunt.com/posts/omnimind-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-omnimind&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=951981&theme=dark&t=1744967792438" alt="OmniMind - OmniMind&#0058;&#0032;MCP&#0032;&#0043;&#0032;AI&#0032;in&#0032;1&#0032;Line—Free&#0032;for&#0032;All&#0033; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ---
 
 ## How to Get Started
