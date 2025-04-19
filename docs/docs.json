@@ -7,7 +7,7 @@
     "light": "#55e4c8",
     "dark": "#000000"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/Light.svg",
   "navigation": {
     "tabs": [
       {
@@ -34,8 +34,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/Light.svg",
+    "dark": "/images/Dark.svg"
   },
   "navbar": {
     "links": [
@@ -47,7 +47,7 @@
   },
   "seo": {
     "metatags": {
-      "og:image": "https://github.com/Techiral/OmniMind/blob/main/static/Untitled%20design%20(9).png?raw=true"
+      "og:image": "/images/omnimind.png"
     },
     "indexing": "navigable"
   },
