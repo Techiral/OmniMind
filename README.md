@@ -1,20 +1,26 @@
-# OmniMind
+<picture>
+  <img alt="" src="static/image (1).png"  width="full">
+</picture>
 
-Welcome to OmniMind—an **open-source** Python library designed for effortless **MCP (Model Context Protocol)** integration. It simplifies working with **AI Agents**, **AI workflows**, and **AI Automations**, making it accessible to developers building **AI Tools**, beginners exploring **MCP Servers** and **MCP Clients**, and businesses seeking to enhance their projects. OmniMind is designed as a **Plug & Play** solution, is free to use, and provides all the necessary components to get started with **python** and **AI** development. Created by **Techiral**, OmniMind is your gateway to streamlined **AI** development. Join **Techiral** and the OmniMind team in building the future of AI!
+<h1 align="center">OmniMind </h1>
 
 [![GitHub Stars](https://img.shields.io/github/stars/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Techiral/OmniMind?style=social)](https://github.com/Techiral/OmniMind/network)
 [![Build Status](https://github.com/Techiral/OmniMind/actions/workflows/welcome.yml/badge.svg)](https://github.com/Techiral/OmniMind/actions)
-[![License](https://img.shields.io/github/license/Techiral/OmniMind)](https://github.com/Techiral/OmniMind/blob/main/LICENSE)
-[![Downloads](https://img.shields.io/pypi/dm/omnimind)](https://pypistats.org/packages/omnimind)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-techiral-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/techiral/)
 [![YouTube](https://img.shields.io/badge/YouTube-@techiral-red?style=flat-square&logo=youtube)](https://www.youtube.com/@techiral)
+[![](https://img.shields.io/pypi/dw/omnimind.svg)](https://pypi.org/project/omnimind/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/omnimind.svg)](https://pypi.org/project/omnimind/)
+[![PyPI Version](https://img.shields.io/pypi/v/omnimind.svg)](https://pypi.org/project/omnimind/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/omnimind.svg)](https://pypi.org/project/omnimind/)
+[![Documentation](https://img.shields.io/badge/docs-omnimind-blue)](https://app.readthedocs.org/projects/omnimind/)
+[![License](https://img.shields.io/github/license/Techiral/OmniMind)](https://github.com/Techiral/OmniMind/blob/main/LICENSE)
+[![Twitter Follow](https://img.shields.io/twitter/follow/techiral_?style=social)](https://x.com/techiral_)
+
+Welcome to OmniMind—an **open-source** Python library designed for effortless **MCP (Model Context Protocol)** integration. It simplifies working with **AI Agents**, **AI workflows**, and **AI Automations**, making it accessible to developers building **AI Tools**, beginners exploring **MCP Servers** and **MCP Clients**, and businesses seeking to enhance their projects. OmniMind is designed as a **Plug & Play** solution, is free to use, and provides all the necessary components to get started with **python** and **AI** development. Created by **Techiral**, OmniMind is your gateway to streamlined **AI** development. Join **Techiral** and the OmniMind team in building the future of AI!
 
 ---
 
-<p align="center">
-  <img src="https://github.com/Techiral/OmniMind/blob/main/demo/OmniMind.png?raw=true" width="600" height="400">
-</p>
 
 ## What’s OmniMind All About?
 
