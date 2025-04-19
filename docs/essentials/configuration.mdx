@@ -1,0 +1,207 @@
+---
+title: Configuration
+description: "Configure your mcp_use environment"
+---
+
+# Configuration Guide
+
+This guide covers all the configuration options available in mcp_use.
+
+## API Keys
+
+Make sure to have the api key relative to the provider of your choice available in the environment you can either:
+
+1 - Create `.env` file with your keys as:
+
+```bash
+# OpenAI
+OPENAI_API_KEY=your_api_key_here
+# Anthropic
+ANTHROPIC_API_KEY=your_api_key_here
+# Groq
+GROQ_API_KEY=your_api_key_here
+```
+
+and load it in python using
+
+```python
+from dotenv import load_dotenv
+load_dotenv()
+```
+
+this will make all the keys defibned in `.env` available in yout python runtime, granted that you run from where the .env is located.
+
+2 - Set it in your environment by running in your terminal the following command, e.g. for openai:
+
+```bash
+export OPENAI_API_KEY='..."
+```
+
+and then import it in your python code as:
+
+```python
+import os
+OPENAI_API_KEY = os.getenv(OPENAI_API_KEY,"")
+```
+
+or any other method you might prefer.
+
+## MCP Server Configuration
+
+mcp_use supports any MCP server through a flexible configuration system. (For a list of awesome servers you can visit https://github.com/punkpeye/awesome-mcp-servers or https://github.com/appcypher/awesome-mcp-servers which have an amazing collection of them)
+
+The configuration is defined in a JSON file with the following structure:
+
+```json
+{
+  "mcpServers": {
+    "server_name": {
+      "command": "command_to_run",
+      "args": ["arg1", "arg2"],
+      "env": {
+        "ENV_VAR": "value"
+      }
+    }
+  }
+}
+```
+
+MCP servers can use different connection types (STDIO, HTTP). For details on these connection types and how to configure them, see the [Connection Types](./connection-types) guide.
+
+### Configuration Options
+
+- `server_name`: A unique identifier for your MCP server
+- `command`: The command to start the MCP server
+- `args`: Array of arguments to pass to the command
+- `env`: Environment variables to set for the server
+
+### Example Configuration
+
+Here's a basic example of how to configure an MCP server:
+
+```json
+{
+  "mcpServers": {
+    "my_server": {
+      "command": "npx",
+      "args": ["@my-mcp/server"],
+      "env": {
+        "PORT": "3000"
+      }
+    }
+  }
+}
+```
+
+### Multiple Server Configuration
+
+You can configure multiple MCP servers in a single configuration file, allowing you to use different servers for different tasks or combine their capabilities (e.g.):
+
+```json
+{
+  "mcpServers": {
+    "airbnb": {
+      "command": "npx",
+      "args": ["-y", "@openbnb/mcp-server-airbnb", "--ignore-robots-txt"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": { "DISPLAY": ":1" }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/pietro/projects/mcp-use/"]
+    }
+  }
+}
+```
+
+For a complete example of using multiple servers, see the [multi-server example](https://github.com/pietrozullo/mcp-use/blob/main/examples/multi_server_example.py) in our repository.
+
+## Agent Configuration
+
+When creating an MCPAgent, you can configure several parameters:
+
+```python
+from mcp_use import MCPAgent, MCPClient
+from langchain_openai import ChatOpenAI
+
+# Basic configuration
+agent = MCPAgent(
+    llm=ChatOpenAI(model="gpt-4o", temperature=0.7),
+    client=MCPClient.from_config_file("config.json"),
+    max_steps=30
+)
+
+# Advanced configuration
+agent = MCPAgent(
+    llm=ChatOpenAI(model="gpt-4o", temperature=0.7),
+    client=MCPClient.from_config_file("config.json"),
+    max_steps=30,
+    server_name=None,
+    auto_initialize=True,
+    memory_enabled=True,
+    system_prompt="Custom instructions for the agent",
+    additional_instructions="Additional guidelines for specific tasks",
+    disallowed_tools=["file_system", "network", "shell"]  # Restrict potentially dangerous tools
+)
+```
+
+### Available Parameters
+
+- `llm`: Any LangChain-compatible language model (required)
+- `client`: The MCPClient instance (optional if connectors are provided)
+- `connectors`: List of connectors if not using client (optional)
+- `server_name`: Name of the server to use (optional)
+- `max_steps`: Maximum number of steps the agent can take (default: 5)
+- `auto_initialize`: Whether to initialize automatically (default: False)
+- `memory_enabled`: Whether to enable memory (default: True)
+- `system_prompt`: Custom system prompt (optional)
+- `system_prompt_template`: Custom system prompt template (optional)
+- `additional_instructions`: Additional instructions for the agent (optional)
+- `disallowed_tools`: List of tool names that should not be available to the agent (optional)
+
+### Tool Access Control
+
+You can restrict which tools are available to the agent for security or to limit its capabilities:
+
+```python
+# Create agent with restricted tools
+agent = MCPAgent(
+    llm=ChatOpenAI(model="gpt-4o"),
+    client=client,
+    disallowed_tools=["file_system", "network", "shell"]  # Restrict potentially dangerous tools
+)
+
+# Update restrictions after initialization
+agent.set_disallowed_tools(["file_system", "network", "shell", "database"])
+await agent.initialize()  # Reinitialize to apply changes
+
+# Check current restrictions
+restricted_tools = agent.get_disallowed_tools()
+print(f"Restricted tools: {restricted_tools}")
+```
+
+This feature is useful for:
+
+- Restricting access to sensitive operations
+- Limiting agent capabilities for specific tasks
+- Preventing the agent from using potentially dangerous tools
+- Focusing the agent on specific functionality
+
+## Error Handling
+
+mcp_use provides several ways to handle errors:
+
+1. **Connection Errors**: Check your MCP server configuration and ensure the server is running
+2. **Authentication Errors**: Verify your API keys are correctly set in the environment
+3. **Timeout Errors**: Adjust the `max_steps` parameter if operations are timing out
+
+## Best Practices
+
+1. Always use environment variables for sensitive information
+2. Keep configuration files in version control (without sensitive data)
+3. Use appropriate timeouts for different types of operations
+4. Enable verbose logging during development
+5. Test configurations in a development environment before production

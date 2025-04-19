@@ -1,71 +1,45 @@
 ---
 title: Introduction
-description: "Welcome to the home of your new documentation"
+description: "Welcome to mcp_use - The Open Source MCP Client Library"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+<img className="block dark:hidden" src="/images/hero-light.png" alt="mcp_use Light Theme" />
+<img className="hidden dark:block" src="/images/hero-dark.png" alt="mcp_use Dark Theme" />
 
-## Setting up
+## What is mcp_use?
 
-The first step to world-class documentation is setting up your editing environments.
+mcp_use is an open source library that enables developers to connect any Language Learning Model (LLM) to any MCP server, allowing the creation of custom agents with tool access without relying on closed-source or application-specific clients.
+
+## Key Features
 
 <CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
+  <Card title="Open Source" icon="code" href="/essentials/installation">
+    Connect any LLM to any MCP server without vendor lock-in
   </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
+  <Card title="Flexible Configuration" icon="server" href="/essentials/configuration">
+    Support for any MCP server through a simple configuration system
+  </Card>
+  <Card title="Easy Setup" icon="gear" href="/essentials/configuration">
+    Simple JSON-based configuration for MCP server integration
+  </Card>
+  <Card title="Universal LLM Support" icon="robot" href="/essentials/llm-integration">
+    Compatible with any LangChain-supported LLM provider
+  </Card>
+  <Card title="HTTP Connection" icon="network" href="/quickstart">
+    Connect to MCP servers running on specific HTTP ports for web-based integrations
+  </Card>
+  <Card title="Dynamic Server Selection" icon="shuffle" href="/quickstart">
+    Agents can dynamically choose the most appropriate MCP server for the task.
   </Card>
 </CardGroup>
 
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
+## Getting Started
 
 <CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
+  <Card title="Installation" icon="download" href="/quickstart">
+    Install mcp_use and set up your environment
   </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
+  <Card title="Configuration" icon="book" href="/essentials/configuration">
+    Learn how to configure mcp_use with your MCP server
   </Card>
 </CardGroup>

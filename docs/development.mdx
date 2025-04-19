@@ -1,107 +1,135 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: Development
+description: "Contributing to mcp_use"
 ---
 
-<Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding. <br />
-  Please upgrade to ```docs.json``` before proceeding and delete the legacy ```mint.json``` file.
-</Info>
+# Development Guide
 
-Follow these steps to install and run Mintlify on your operating system:
+This guide will help you set up your development environment and contribute to mcp_use.
 
-**Step 1**: Install Mintlify:
+## Prerequisites
 
-<CodeGroup>
+- Python 3.8 or higher
+- Git
+- Node.js and npm (for MCP server dependencies)
 
-  ```bash npm
-  npm i -g mintlify
-  ```
+## Setting Up Development Environment
 
-```bash yarn
-yarn global add mintlify
+1. Clone the repository:
+
+```bash
+git clone https://github.com/pietrozullo/mcp-use.git
+cd mcp-use
 ```
 
-</CodeGroup>
+2. Install development dependencies:
 
-**Step 2**: Navigate to the docs directory (where the `docs.json` file is located) and execute the following command:
+```bash
+pip install -e ".[dev]"
+```
+
+3. Install pre-commit hooks:
+
+```bash
+pre-commit install
+```
+
+## Code Style
+
+mcp_use uses Ruff for code formatting and linting. The project follows these style guidelines:
+
+- Use type hints for all function parameters and return values
+- Follow PEP 8 style guide
+- Use docstrings for all public functions and classes
+- Keep functions focused and single-purpose
+
+## Running Tests
+
+The project uses pytest for testing. To run the test suite:
+
+```bash
+pytest
+```
+
+For more specific test runs:
+
+```bash
+# Run tests with coverage
+pytest --cov=mcp_use
+
+# Run specific test file
+pytest tests/test_client.py
+
+# Run tests with verbose output
+pytest -v
+```
+
+## Documentation
+
+Documentation is written in MDX format and uses Mintlify for rendering. To preview documentation changes:
+
+1. Install Mintlify CLI:
+
+```bash
+npm i -g mintlify
+```
+
+2. Run the development server:
 
 ```bash
 mintlify dev
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+## Contributing
 
-### Custom Ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. To run Mintlify on port 3333, for instance, use this command:
+1. Create a new branch for your feature:
 
 ```bash
-mintlify dev --port 3333
+git checkout -b feature/your-feature-name
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
-
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
-
-## Mintlify Versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local website doesn't align with the production version, please update the CLI:
-
-<CodeGroup>
-
-```bash npm
-npm i -g mintlify@latest
-```
-
-```bash yarn
-yarn global upgrade mintlify
-```
-
-</CodeGroup>
-
-## Validating Links
-
-The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
+2. Make your changes and commit them:
 
 ```bash
-mintlify broken-links
+git add .
+git commit -m "Description of your changes"
 ```
 
-## Deployment
+3. Push your changes and create a pull request:
 
-<Tip>
-  Unlimited editors available under the [Pro
-  Plan](https://mintlify.com/pricing) and above.
-</Tip>
+```bash
+git push origin feature/your-feature-name
+```
 
-If the deployment is successful, you should see the following:
+## Project Structure
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+```
+mcp-use/
+├── mcp_use/           # Main package code
+├── tests/             # Test files
+├── examples/          # Example usage
+├── docs/             # Documentation
+├── static/           # Static assets
+└── pyproject.toml    # Project configuration
+```
 
-## Code Formatting
+## Adding New MCP Servers
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+To add support for a new MCP server:
 
-## Troubleshooting
+1. Create a new configuration template in the examples directory
+2. Add necessary server-specific code in the `mcp_use` package
+3. Update documentation with new server information
+4. Add tests for the new server functionality
 
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+## Release Process
 
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall mintlify: `npm install -g mintlify`
-  </Accordion>
+1. Update version in `pyproject.toml`
+2. Update CHANGELOG.md
+3. Create a new release tag
+4. Build and publish to PyPI:
 
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the \~/.mintlify folder. Afterwards, run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/mintlify?activeTab=versions)
+```bash
+python -m build
+python -m twine upload dist/*
+```
