@@ -1,5 +1,5 @@
 ---
-title: Connection Types
+title: "Connection Types"
 description: "Understanding the different connection types for MCP servers"
 ---
 
@@ -63,7 +63,6 @@ HTTP connections communicate with MCP servers over standard HTTP/HTTPS protocols
 The choice of connection type depends on your specific use case:
 
 1. **STDIO**: Best for local development, testing, and enhanced security scenarios where network exposure is a concern
-
 2. **HTTP**: Ideal for stateless operations, simple integrations, and when working with existing HTTP infrastructure
 
 When configuring your mcp_use environment, you can specify the connection type in your configuration file as shown in the examples above.
@@ -73,15 +72,16 @@ When configuring your mcp_use environment, you can specify the connection type i
 Connection types are automatically inferred from your configuration file based on the parameters provided:
 
 ```python
-from mcp_use import MCPClient
+from omnimind import OmniMind
 
 # The connection type is automatically inferred based on your config file
-client = MCPClient.from_config_file("config.json", server_name="my_server")
+agent = OmniMind(config_path="my_config.json")
+agent.run()
 ```
 
 For example:
 
-- If your configuration includes `command` and `args`, a STDIO connection will be used
+- If your configuration includes `command` and `args`, an STDIO connection will be used
 - If your configuration has a `url` starting with `http://` or `https://`, an HTTP connection will be used
 
 This automatic inference simplifies the configuration process and ensures the appropriate connection type is used without requiring explicit specification.

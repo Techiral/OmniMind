@@ -1,15 +1,15 @@
 ---
-title: Configuration
-description: "Configure your mcp_use environment"
+title: "Configuration"
+description: "Configure your OmniMind environment"
 ---
 
 # Configuration Guide
 
-This guide covers all the configuration options available in mcp_use.
+This guide covers all the configuration options available in OmniMind.
 
 ## API Keys
 
-Make sure to have the api key relative to the provider of your choice available in the environment you can either:
+Make sure to have the api key relative to the provider of your choice available in the environment. You can either:
 
 1 - Create `.env` file with your keys as:
 
@@ -20,24 +20,26 @@ OPENAI_API_KEY=your_api_key_here
 ANTHROPIC_API_KEY=your_api_key_here
 # Groq
 GROQ_API_KEY=your_api_key_here
+# Gemini
+GEMINI_API_KEY=your_api_key_here
 ```
 
-and load it in python using
+and load it in Python using
 
 ```python
 from dotenv import load_dotenv
 load_dotenv()
 ```
 
-this will make all the keys defibned in `.env` available in yout python runtime, granted that you run from where the .env is located.
+This will make all the keys defined in `.env` available in your Python runtime, granted that you run from where the .env is located.
 
-2 - Set it in your environment by running in your terminal the following command, e.g. for openai:
+2 - Set it in your environment by running in your terminal the following command, e.g., for OpenAI:
 
 ```bash
 export OPENAI_API_KEY='..."
 ```
 
-and then import it in your python code as:
+and then import it in your Python code as:
 
 ```python
 import os
@@ -48,7 +50,7 @@ or any other method you might prefer.
 
 ## MCP Server Configuration
 
-mcp_use supports any MCP server through a flexible configuration system. (For a list of awesome servers you can visit https://github.com/punkpeye/awesome-mcp-servers or https://github.com/appcypher/awesome-mcp-servers which have an amazing collection of them)
+mcp_use supports any MCP server through a flexible configuration system. (For a list of awesome servers, you can visit https://github.com/punkpeye/awesome-mcp-servers or https://github.com/appcypher/awesome-mcp-servers, which have an amazing collection of them)
 
 The configuration is defined in a JSON file with the following structure:
 
@@ -124,71 +126,54 @@ For a complete example of using multiple servers, see the [multi-server example]
 When creating an MCPAgent, you can configure several parameters:
 
 ```python
-from mcp_use import MCPAgent, MCPClient
-from langchain_openai import ChatOpenAI
+from omnimind import OmniMind
+import asyncio
+import os
+import json
 
-# Basic configuration
-agent = MCPAgent(
-    llm=ChatOpenAI(model="gpt-4o", temperature=0.7),
-    client=MCPClient.from_config_file("config.json"),
-    max_steps=30
-)
+async def advanced_multi_server_usage():
+    # Ensure GOOGLE_API_KEY is set
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        raise ValueError("Please set the GOOGLE_API_KEY environment variable before running this script")
 
-# Advanced configuration
-agent = MCPAgent(
-    llm=ChatOpenAI(model="gpt-4o", temperature=0.7),
-    client=MCPClient.from_config_file("config.json"),
-    max_steps=30,
-    server_name=None,
-    auto_initialize=True,
-    memory_enabled=True,
-    system_prompt="Custom instructions for the agent",
-    additional_instructions="Additional guidelines for specific tasks",
-    disallowed_tools=["file_system", "network", "shell"]  # Restrict potentially dangerous tools
-)
+    # Initialize OmniMind with the multi-server config
+    agent = OmniMind(config_path="multi_server_config.json", api_key=api_key)
+    try:
+        # Connect to all servers
+        await agent._connect_servers()
+        print("Tools loaded:", [tool.name for tool in agent.tools])
+
+        # Step 1: Fetch web content
+        fetch_query = "Fetch the content of 'https://marvel.fandom.com/wiki/Stark_Industries_(Earth-616)' and summarize it"
+        fetch_response = await agent.invoke(fetch_query)
+        summary = fetch_response["messages"][-1].content  # Extract the summary from the last message
+        print("\nStep 1 - Web Summary:", summary)
+
+        # Step 2: Store the summary in memory
+        memory_query = f"Store this in memory under key 'stark_summary': {summary}"
+        await agent.invoke(memory_query)
+        print("Step 2 - Stored summary in memory")
+
+        # Step 3: Recall from memory and save to a file
+        recall_query = "Recall the value stored under 'stark_summary' and save it to a file named 'stark_summary.txt' in the workspace directory"
+        recall_response = await agent.invoke(recall_query)
+        print("Step 3 - Recalled and saved to file:", recall_response["messages"][-1].content)
+
+    except Exception as e:
+        print(f"Error during execution: {e}")
+    finally:
+        await agent.close()
+
+if __name__ == "__main__":
+    asyncio.run(advanced_multi_server_usage())
 ```
 
 ### Available Parameters
 
-- `llm`: Any LangChain-compatible language model (required)
-- `client`: The MCPClient instance (optional if connectors are provided)
-- `connectors`: List of connectors if not using client (optional)
-- `server_name`: Name of the server to use (optional)
-- `max_steps`: Maximum number of steps the agent can take (default: 5)
-- `auto_initialize`: Whether to initialize automatically (default: False)
-- `memory_enabled`: Whether to enable memory (default: True)
-- `system_prompt`: Custom system prompt (optional)
-- `system_prompt_template`: Custom system prompt template (optional)
-- `additional_instructions`: Additional instructions for the agent (optional)
-- `disallowed_tools`: List of tool names that should not be available to the agent (optional)
-
-### Tool Access Control
-
-You can restrict which tools are available to the agent for security or to limit its capabilities:
-
-```python
-# Create agent with restricted tools
-agent = MCPAgent(
-    llm=ChatOpenAI(model="gpt-4o"),
-    client=client,
-    disallowed_tools=["file_system", "network", "shell"]  # Restrict potentially dangerous tools
-)
-
-# Update restrictions after initialization
-agent.set_disallowed_tools(["file_system", "network", "shell", "database"])
-await agent.initialize()  # Reinitialize to apply changes
-
-# Check current restrictions
-restricted_tools = agent.get_disallowed_tools()
-print(f"Restricted tools: {restricted_tools}")
-```
-
-This feature is useful for:
-
-- Restricting access to sensitive operations
-- Limiting agent capabilities for specific tasks
-- Preventing the agent from using potentially dangerous tools
-- Focusing the agent on specific functionality
+- `config_path`: Path to the server configuration file.
+- `api_key`: Authentication key for accessing services.
+- `server_name`: Specifies the target server for tasks.
 
 ## Error Handling
 

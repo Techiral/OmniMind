@@ -1,6 +1,6 @@
 ---
-title: Quickstart
-description: "Get started with mcp_use in minutes"
+title: "Quickstart"
+description: "Get started with OmniMind in minutes"
 ---
 
 # Quickstart Guide
@@ -12,14 +12,14 @@ This guide will help you get started with mcp_use quickly. We'll cover installat
 You can install mcp_use using pip:
 
 ```bash
-pip install mcp-use
+pip install omnimind
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/pietrozullo/mcp-use.git
-cd mcp-use
+git clone https://github.com/Techiral/OmniMind.git
+cd OmniMind
 pip install -e .
 ```
 
@@ -53,46 +53,12 @@ ANTHROPIC_API_KEY=your_api_key_here
 Here's a simple example to get you started:
 
 ```python
-import asyncio
-import os
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+# Add your own server to OmniMind
+from omnimind import OmniMind
 
-async def main():
-    # Load environment variables
-    load_dotenv()
-
-    # Create configuration dictionary
-    config = {
-      "mcpServers": {
-        "playwright": {
-          "command": "npx",
-          "args": ["@playwright/mcp@latest"],
-          "env": {
-            "DISPLAY": ":1"
-          }
-        }
-      }
-    }
-
-    # Create MCPClient from configuration dictionary
-    client = MCPClient.from_dict(config)
-
-    # Create LLM
-    llm = ChatOpenAI(model="gpt-4o")
-
-    # Create agent with the client
-    agent = MCPAgent(llm=llm, client=client, max_steps=30)
-
-    # Run the query
-    result = await agent.run(
-        "Find the best restaurant in San Francisco USING GOOGLE SEARCH",
-    )
-    print(f"\nResult: {result}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+agent = OmniMind()
+agent.add_server("my_server", command="python", args=["my_server.py"])
+agent.run()  # Your server’s live!
 ```
 
 ## Configuration Options
@@ -100,9 +66,8 @@ if __name__ == "__main__":
 You can also add the servers configuration from a config file:
 
 ```python
-client = MCPClient.from_config_file(
-    os.path.join("browser_mcp.json")
-)
+# Initialize OmniMind with the multi-server config
+agent = OmniMind(config_path="browser_mcp.json", api_key=api_key)
 ```
 
 Example configuration file (`browser_mcp.json`):
@@ -131,105 +96,55 @@ Define multiple servers in your configuration file (`multi_server_config.json`):
 
 ```json
 {
-  "mcpServers": {
-    "airbnb": {
-      "command": "npx",
-      "args": ["-y", "@openbnb/mcp-server-airbnb", "--ignore-robots-txt"]
-    },
-    "playwright": {
-      "command": "npx",
-      "args": ["@playwright/mcp@latest"],
-      "env": {
-        "DISPLAY": ":1"
-      }
+    "mcpServers": {
+        "fetch": {
+            "command": "uvx",
+            "args": ["mcp-server-fetch"]
+        },
+        "memory": {
+            "command": "C:\\Program Files\\nodejs\\npx.cmd",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {
+                "MEMORY_FILE_PATH": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\final JARVIS\\mcp\\workspace\\memory.json"
+            }
+        },
+        "filesystem": {
+            "command": "C:\\Program Files\\nodejs\\npx.cmd",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                "C:\\Users\\Lenovo\\OneDrive\\Desktop",
+                "C:\\Users\\Lenovo\\OneDrive\\Desktop\\final JARVIS\\mcp\\workspace"
+            ]
+        }
     }
-  }
 }
 ```
 
 **Usage:**
 
-When an `MCPClient` with multiple servers is passed to an `MCPAgent`, the agent gains access to tools from all configured servers. By default, you might need to guide the agent or explicitly specify which server to use for a given task using the `server_name` parameter in the `agent.run()` method.
+When working with an `OmniMind` agent is configured for multiple servers, the agent can access tools available on all the connected servers. However, for tasks targeting a specific server, you may need to explicitly specify which server to use. This is done using the `server_name` parameter in the `agent.run()` method, as demonstrated in the following code snippet:
 
 ```python
-# Assuming MCPClient is initialized with the multi_server_config.json
-client = MCPClient.from_config_file("multi_server_config.json")
-agent = MCPAgent(llm=llm, client=client) # Server manager not enabled by default
+# Initialize OmniMind with the multi-server config
+agent = OmniMind(config_path="multi_server_config.json", api_key=api_key)
+try:
+    # Connect to all servers
+    await agent._connect_servers()
+    print("Tools loaded:", [tool.name for tool in agent.tools])
 
-# Manually specify the server if needed
-result = await agent.run(
-    "Search for Airbnb listings in Barcelona",
-    server_name="airbnb"
-)
-```
-
-## Enabling Dynamic Server Selection (Server Manager)
-
-To improve efficiency and potentially reduce agent confusion when many tools are available, you can enable the Server Manager. Set `use_server_manager=True` when creating the `MCPAgent`.
-
-When enabled, the agent will automatically select the appropriate server based on the tool chosen by the LLM for each step. This avoids connecting to unnecessary servers.
-
-```python
-# Assuming MCPClient is initialized with the multi_server_config.json
-client = MCPClient.from_config_file("multi_server_config.json")
-agent = MCPAgent(llm=llm, client=client, use_server_manager=True) # Enable server manager
-
-# The agent can now use tools from both airbnb and playwright servers
-result = await agent.run(
-    "Search for a place in Barcelona on Airbnb, then Google nearby restaurants."
-)
-```
-
-## Restricting Tool Access
-
-You can control which tools are available to the agent:
-
-```python
-import asyncio
-import os
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
-
-async def main():
-    # Load environment variables
-    load_dotenv()
-
-    # Create configuration dictionary
-    config = {
-      "mcpServers": {
-        "playwright": {
-          "command": "npx",
-          "args": ["@playwright/mcp@latest"],
-          "env": {
-            "DISPLAY": ":1"
-          }
-        }
-      }
-    }
-
-    # Create MCPClient from configuration dictionary
-    client = MCPClient.from_dict(config)
-
-    # Create LLM
-    llm = ChatOpenAI(model="gpt-4o")
-
-    # Create agent with restricted tools
-    agent = MCPAgent(
-        llm=llm,
-        client=client,
-        max_steps=30,
-        disallowed_tools=["file_system", "network"]  # Restrict potentially dangerous tools
-    )
-
-    # Run the query
-    result = await agent.run(
-        "Find the best restaurant in San Francisco USING GOOGLE SEARCH",
-    )
-    print(f"\nResult: {result}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    # Step 1: Fetch web content
+    fetch_query = "Fetch the content of 'https://marvel.fandom.com/wiki/Stark_Industries_(Earth-616)' and summarize it"
+    fetch_response = await agent.invoke(fetch_query)
+    summary = fetch_response["messages"][-1].content  # Extract the summary from the last message
+    print("\nStep 1 - Web Summary:", summary)
+except Exception as e:
+    print(f"Error during execution: {e}")
+finally:
+     await agent.close()
 ```
 
 ## Available MCP Servers
@@ -237,53 +152,6 @@ if __name__ == "__main__":
 mcp_use supports any MCP server, allowing you to connect to a wide range of server implementations. For a comprehensive list of available servers, check out the [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) repository.
 
 Each server requires its own configuration. Check the [Configuration Guide](/essentials/configuration) for details.
-
-## HTTP Connection
-
-mcp_use now supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
-
-Here's a simple example to get you started with HTTP connections:
-
-```python
-import asyncio
-import os
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
-
-async def main():
-    # Load environment variables
-    load_dotenv()
-
-    # Create configuration dictionary
-    config = {
-      "mcpServers": {
-        "http": {
-          "url": "http://localhost:8931/sse"
-        }
-      }
-    }
-
-    # Create MCPClient from configuration dictionary
-    client = MCPClient.from_dict(config)
-
-    # Create LLM
-    llm = ChatOpenAI(model="gpt-4o")
-
-    # Create agent with the client
-    agent = MCPAgent(llm=llm, client=client, max_steps=30)
-
-    # Run the query
-    result = await agent.run(
-        "Find the best restaurant in San Francisco USING GOOGLE SEARCH",
-    )
-    print(f"\nResult: {result}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-This example demonstrates how to connect to an MCP server running on a specific HTTP port. Make sure to start your MCP server before running this example.
 
 ## Next Steps
 
