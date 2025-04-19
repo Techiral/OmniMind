@@ -19,7 +19,7 @@
           },
           {
             "group": "Essentials",
-            "pages": ["essentials/configuration", "essentials/llm-integration", "essentials/debugging", "essentials/connection-types"]
+            "pages": ["essentials/configuration", "essentials/llm-integration", "essentials/connection-types"]
           },
           {
             "group": "API Reference",
@@ -41,13 +41,16 @@
     "links": [
       {
         "label": "GitHub",
-        "href": "https://github.com/pietrozullo/mcp-use"
+        "href": "https://github.com/Techiral/OmniMind"
       }
     ]
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/pietrozullo/mcp-use"
+      "x": "https://x.com/techiral_",
+      "github": "https://github.com/Techiral/OmniMind",
+      "linkedin": "https://www.linkedin.com/in/techiral/"
+      "youtube": "https://www.youtube.com/@techiral"
     }
   },
   "anchors": [
