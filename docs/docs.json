@@ -47,7 +47,7 @@
   },
   "seo": {
     "metatags": {
-      "og:image": "/images/omnimind.png"
+      "og:image": "https://github.com/Techiral/OmniMind/blob/main/static/Untitled%20design%20(9).png?raw=true"
     },
     "indexing": "navigable"
   },
