@@ -13,7 +13,7 @@
 [![PyPI Downloads](https://img.shields.io/pypi/dm/omnimind.svg)](https://pypi.org/project/omnimind/)
 [![PyPI Version](https://img.shields.io/pypi/v/omnimind.svg)](https://pypi.org/project/omnimind/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/omnimind.svg)](https://pypi.org/project/omnimind/)
-[![Documentation](https://img.shields.io/badge/docs-omnimind-blue)](https://app.readthedocs.org/projects/omnimind/)
+[![Documentation](https://img.shields.io/badge/docs-omnimind-blue)](https://techiral.mintlify.app/)
 [![License](https://img.shields.io/github/license/Techiral/OmniMind)](https://github.com/Techiral/OmniMind/blob/main/LICENSE)
 [![Twitter Follow](https://img.shields.io/twitter/follow/techiral_?style=social)](https://x.com/techiral_)
 
