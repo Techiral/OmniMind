@@ -36,10 +36,10 @@ pre-commit install
 
 ## Code Style
 
-mcp_use uses Ruff for code formatting and linting. The project follows these style guidelines:
+OmniMind uses Ruff for code formatting and linting. The project follows these style guidelines:
 
 - Use type hints for all function parameters and return values
-- Follow PEP 8 style guide
+- Follow the PEP 8 style guide
 - Use docstrings for all public functions and classes
 - Keep functions focused and single-purpose
 
@@ -55,7 +55,7 @@ For more specific test runs:
 
 ```bash
 # Run tests with coverage
-pytest --cov=mcp_use
+pytest --cov=omnimind
 
 # Run specific test file
 pytest tests/test_client.py
@@ -104,8 +104,8 @@ git push origin feature/your-feature-name
 ## Project Structure
 
 ```
-mcp-use/
-├── mcp_use/           # Main package code
+OmniMind/
+├── omnimind/           # Main package code
 ├── tests/             # Test files
 ├── examples/          # Example usage
 ├── docs/             # Documentation
@@ -118,13 +118,13 @@ mcp-use/
 To add support for a new MCP server:
 
 1. Create a new configuration template in the examples directory
-2. Add necessary server-specific code in the `mcp_use` package
+2. Add the necessary server-specific code in the `omnimind` package
 3. Update documentation with new server information
 4. Add tests for the new server functionality
 
 ## Release Process
 
-1. Update version in `pyproject.toml`
+1. Update the version in `pyproject.toml`
 2. Update CHANGELOG.md
 3. Create a new release tag
 4. Build and publish to PyPI:
